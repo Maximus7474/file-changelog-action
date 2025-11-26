@@ -1,13 +1,17 @@
 name: "File changelog tracker"
 description: "An action to list files changed between two releases"
-# inputs:
-#   name:
-#     description: "Who to greet"
-#     required: true
-#     default: "World"
+inputs:
+  webhook:
+    description: "Discord webhook, to share the changelog to."
+    required: false
+    default: ""
+  changelog:
+    description: "Save the changed files to the changelog directory (fill in with a directory)"
+    required: false
+    default: ""
 # outputs:
 #   time:
 #     description: "The time of the greeting"
 runs:
   using: "node20"
-  main: "out/main.js"
+  main: "dist/main.js"
