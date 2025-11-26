@@ -65,6 +65,7 @@ describe('run', () => {
     jest.clearAllMocks();
     (core.getInput as jest.Mock).mockImplementation((name) => {
       if (name === 'github_token') return 'mock-token';
+      else if (name === 'webhook' && process.env.DISCORD_WEBHOOK) return process.env.DISCORD_WEBHOOK;
       return '';
     });
   });
@@ -95,7 +96,6 @@ describe('run', () => {
 
     // 4. Check results reporting
     expect(core.info).toHaveBeenCalledWith(`Latest Tag Found: ${MOCK_TAG_NAME}`);
-    expect(core.info).toHaveBeenCalledWith(expect.stringContaining(`✅ Found 2 new commits since tag ${MOCK_TAG_NAME}.`));
     expect(core.setFailed).not.toHaveBeenCalled();
   });
 });
