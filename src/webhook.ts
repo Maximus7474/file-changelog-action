@@ -11,8 +11,8 @@ export async function SendWebhook(versionRef: string, changelog: FileChangelog, 
   if (!discordWebhook || typeof discordWebhook !== 'string') return;
 
   let payload: WebhookPayload = {
-    content: `## File changelog for ${versionRef}`,
-    embeds: []
+    embeds: [],
+    username: `File changelog for ${versionRef}`
   };
 
   if (changelog.added.length > 0) {
@@ -27,7 +27,7 @@ export async function SendWebhook(versionRef: string, changelog: FileChangelog, 
     payload.embeds.push({
       title: 'Removed files:',
       description:
-        `\`\`\`ansi\n[0;31m${changelog.removed.map(e => `+ ${e}`).join('\n')}\n\`\`\``
+        `\`\`\`ansi\n[0;31m${changelog.removed.map(e => `- ${e}`).join('\n')}\n\`\`\``
     });
   }
 
@@ -35,7 +35,7 @@ export async function SendWebhook(versionRef: string, changelog: FileChangelog, 
     payload.embeds.push({
       title: 'Modified files:',
       description:
-        `\`\`\`ansi\n[0;33m${changelog.modified.map(e => `+ ${e}`).join('\n')}\n\`\`\``
+        `\`\`\`ansi\n[0;33m${changelog.modified.map(e => `* ${e}`).join('\n')}\n\`\`\``
     });
   }
 
