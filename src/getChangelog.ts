@@ -39,6 +39,8 @@ export async function getFileChangelog() {
     per_page: 1,
   });
 
+  core.info(`tagsResponse.data: ${JSON.stringify(tagsResponse.data, null, 4)}`);
+
   if (tagsResponse.data.length === 0) {
     core.setFailed('No Git tags found in the repository.');
     return;
