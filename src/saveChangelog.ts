@@ -1,8 +1,10 @@
 import * as core from "@actions/core";
 import { writeFile } from "fs/promises";
+import path from "path";
 
 import type { FileChangelog } from "../types/core";
-import path from "path";
+
+import { CHANGELOG_FILENAME } from "./config";
 
 type ActionCore = typeof core;
 type AcceptedFileFormat = "txt" | "md";
@@ -36,8 +38,8 @@ function formatChangelogList(
   return content;
 }
 
-export async function SaveChangelog(filePath: string, filename: string, versionRef: string, changelog: FileChangelog, core: ActionCore) {
-  const fileFormat = getFileFormat(filename);
+export async function SaveChangelog(versionRef: string, changelog: FileChangelog, core: ActionCore) {
+  const fileFormat = getFileFormat(CHANGELOG_FILENAME);
 
   let fileContent: string;
 
@@ -56,7 +58,7 @@ export async function SaveChangelog(filePath: string, filename: string, versionR
     changelog.modified, "Modified files", fileFormat
   );
 
-  filename = filename.replace('{version}', versionRef);
+  const filename = CHANGELOG_FILENAME.replace('{version}', versionRef);
 
-  await writeFile(path.join(filePath, filename), fileContent);
+  await writeFile(path.join(CHANGELOG_FILENAME, filename), fileContent);
 }
