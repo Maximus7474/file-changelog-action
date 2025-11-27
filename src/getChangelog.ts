@@ -39,8 +39,6 @@ export async function getFileChangelog() {
     per_page: 2,
   });
 
-  core.info(`tagsResponse.data 2 per page: ${JSON.stringify(tagsResponse.data, null, 4)}`);
-
   if (!tagsResponse.data[0]) {
     core.setFailed('No Git tags found in the repository.');
     return;
@@ -58,12 +56,11 @@ export async function getFileChangelog() {
     return;
   }
 
-  core.info(`Latest Tag Found: ${previousTag.name}`);
-  core.info(`Base Commit SHA (Tag): ${baseCommitSha}`);
+  core.info(`Previous Tag Found: ${previousTag.name}`);
 
   // if the latest tag is the current commit, there are no new changes
   if (baseCommitSha === currentSha) {
-    core.info('The latest tag is the current HEAD. No new commits to compare.');
+    core.info('The previous tag is the current HEAD. No new commits to compare.');
     return;
   }
 
