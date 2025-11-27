@@ -21,6 +21,10 @@ jest.mock('@actions/github', () => ({
   getOctokit: jest.fn(),
 }));
 
+jest.mock('../src/config', () => ({
+  getConfig: jest.fn(),
+}));
+
 export const setupOctokitMocks = (
   tagResponse: any[] = mockTagResponse,
   comparisonResponse: any = mockComparisonData,
