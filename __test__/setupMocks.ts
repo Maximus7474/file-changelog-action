@@ -1,6 +1,8 @@
 import * as github from '@actions/github';
 
-import { CONTEXT_HEAD_SHA, CONTEXT_OWNER, CONTEXT_REPO, MOCK_BASE_SHA, MOCK_TAG_NAME, mockComparisonData, mockTagResponse } from './mockdata';
+import { CONTEXT_HEAD_SHA, CONTEXT_OWNER, CONTEXT_REPO, mockComparisonData, mockTagResponse } from './mockdata';
+import { SendWebhook } from '../src/webhook';
+import { SaveChangelog } from '../src/saveChangelog';
 
 // mock the core module functions used in the action
 jest.mock('@actions/core', () => ({
@@ -24,6 +26,19 @@ jest.mock('@actions/github', () => ({
 jest.mock('../src/config', () => ({
   getConfig: jest.fn(),
 }));
+
+jest.mock('../src/webhook', () => ({
+  SendWebhook: jest.fn(async () => {
+  }),
+}));
+
+jest.mock('../src/saveChangelog', () => ({
+  SaveChangelog: jest.fn(async () => {
+  }),
+}));
+
+export const mockSendWebhook = SendWebhook as jest.Mock;
+export const mockSaveChangelog = SaveChangelog as jest.Mock;
 
 export const setupOctokitMocks = (
   tagResponse: any[] = mockTagResponse,
