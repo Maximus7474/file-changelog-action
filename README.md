@@ -30,7 +30,7 @@ steps:
 
   # Step 3: Run the custom action to generate the file changelog
   - name: Generate File Changelog and Post to Discord
-    uses: Maximus7474/fivem-file-changelog-action@v0.3.0
+    uses: Maximus7474/file-changelog-action@v0.3.0
     with:
       # Optional: The webhook URL is stored securely in GitHub Secrets
       webhook: ${{ secrets.DISCORD_WEBHOOK_URL }}
