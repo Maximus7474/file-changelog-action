@@ -41,13 +41,21 @@ export async function getFileChangelog() {
 
   core.info(`tagsResponse 2 per page: ${JSON.stringify(tagsResponse, null, 4)}`);
 
-  if (tagsResponse.data.length === 0) {
+  if (!tagsResponse.data[0]) {
     core.setFailed('No Git tags found in the repository.');
     return;
   }
 
-  const latestTag = tagsResponse.data[0]!;
-  const baseCommitSha = latestTag.commit.sha;
+  let latestTag = tagsResponse.data[0];
+  let baseCommitSha = latestTag.commit.sha;
+
+  if (latestTag.commit.sha === currentSha && tagsResponse.data[1]) {
+    latestTag = tagsResponse.data[1];
+    baseCommitSha = latestTag.commit.sha;
+  } else {
+    core.info('No other releases to compare');
+    return;
+  }
 
   core.info(`Latest Tag Found: ${latestTag.name}`);
   core.info(`Base Commit SHA (Tag): ${baseCommitSha}`);
