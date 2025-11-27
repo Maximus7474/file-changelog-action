@@ -29,10 +29,9 @@ steps:
 
       # Required: Define patterns to exclude files (e.g., config, readme, workflow files, source code)
       ignore_patterns: |
-        .*
-        **/*.md
+        **/.**
         *.yml
-        README.*
+        changelogs/*
 
   # Step 4: Upload the generated changelog file as a workflow artifact
   - name: Upload Changelog Artifact
