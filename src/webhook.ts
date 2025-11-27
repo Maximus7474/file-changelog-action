@@ -11,6 +11,7 @@ export async function SendWebhook(webhook: string, versionRef: string, changelog
   }
 
   let payload: WebhookPayload = {
+    content: `## File changelog for ${versionRef}`,
     embeds: []
   };
 
