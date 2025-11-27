@@ -1,5 +1,19 @@
 # fivem-file-changelog-action
 
+## Description
+
+This action is a simple system that allows creators to simplify their release workflow by not needing them to track the changed files to share them with their clients. This action will compare two separate releases, or the last release with current latest commit. Once compared it'll either send a discord webhook or save the changelog as a .txt or .md file within your repository (check the demo steps).
+
+> <details>
+>   <summary>Pictures</summary>
+>
+>   <p>Quick demo of it's use, it's not really intended to be sent straight to the clients but used internally</p>
+>
+>   <img src=".github/images/disc_webhook.png" />
+>   <img src=".github/images/md_log.png" />
+> </details>
+
+
 ## Usage
 
 ```yml
@@ -16,7 +30,7 @@ steps:
 
   # Step 3: Run the custom action to generate the file changelog
   - name: Generate File Changelog and Post to Discord
-    uses: Maximus7474/fivem-file-changelog-action@v1
+    uses: Maximus7474/fivem-file-changelog-action@v0.3.0
     with:
       # Optional: The webhook URL is stored securely in GitHub Secrets
       webhook: ${{ secrets.DISCORD_WEBHOOK_URL }}
@@ -27,10 +41,9 @@ steps:
       # Optional: Use a specific filename format, referencing the release tag
       changelog_filename: ${{ github.event.release.tag_name }}.md
 
-      # Required: Define patterns to exclude files (e.g., config, readme, workflow files, source code)
+      # Required: Define patterns to exclude files (e.g., git files, changelogs, etc...)
       ignore_patterns: |
-        **/.**
-        *.yml
+        .*/*|.*
         changelogs/*
 
   # Step 4: Upload the generated changelog file as a workflow artifact
