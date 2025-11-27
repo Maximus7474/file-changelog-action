@@ -12,7 +12,7 @@ inputs:
   changelog_filename:
     description: "The file format to store the changes as (supports: md, txt)"
     required: false
-    default: "{version}.txt"
+    default: "file_changelog.txt"
   ignore_patterns:
     description: 'A list of file patterns (globs) to exclude from the changelog (e.g., **/*.md, docs/**).'
     required: true
