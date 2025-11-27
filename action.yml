@@ -22,4 +22,4 @@ inputs:
 #     description: "The time of the greeting"
 runs:
   using: "node20"
-  main: "dist/main.js"
+  main: "dist/index.js"
