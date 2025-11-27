@@ -2,7 +2,6 @@ import * as core from '@actions/core';
 import { SendWebhook } from './webhook';
 import { SaveChangelog } from './saveChangelog';
 import { getFileChangelog } from './getChangelog';
-import { CHANGELOG_DIR, DISCORD_WEBHOOK } from './config';
 
 export async function run() {
   try {
@@ -11,8 +10,9 @@ export async function run() {
     if (!data) return;
     const { changedFiles, version } = data;
 
-    if (DISCORD_WEBHOOK) await SendWebhook(version, changedFiles, core);
-    if (CHANGELOG_DIR) await SaveChangelog(version, changedFiles, core);
+    // checks for configuration happen within the modules, if not configured it'll return before any actions
+    await SendWebhook(version, changedFiles, core);
+    await SaveChangelog(version, changedFiles, core);
   } catch (error) {
     if (error instanceof Error) {
       core.setFailed(error.message);

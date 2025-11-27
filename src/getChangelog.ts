@@ -1,10 +1,12 @@
 import * as core from '@actions/core';
 import * as github from '@actions/github';
+
 import type { FileChangelog } from '../types/core';
+import { getConfig } from './config';
 
 export async function getFileChangelog() {
-  const GITHUB_TOKEN = core.getInput('github_token', { required: true });
-  const octokit = github.getOctokit(GITHUB_TOKEN);
+  const { githubToken } = getConfig()
+  const octokit = github.getOctokit(githubToken);
   const { owner, repo } = github.context.repo;
   const currentSha = github.context.sha;
 
