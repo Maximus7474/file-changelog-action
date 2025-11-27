@@ -8,9 +8,7 @@ type ActionCore = typeof core;
 
 export async function SendWebhook(versionRef: string, changelog: FileChangelog, core: ActionCore) {
   const { discordWebhook } = getConfig();
-  if (!discordWebhook || typeof discordWebhook !== 'string') {
-    throw new Error('Invalid or missing Discord Webhook URL.');
-  }
+  if (!discordWebhook || typeof discordWebhook !== 'string') return;
 
   let payload: WebhookPayload = {
     content: `## File changelog for ${versionRef}`,
