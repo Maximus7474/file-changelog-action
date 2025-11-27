@@ -4,16 +4,27 @@ import type { Commit, CompareCommits, Tag } from "../types/github";
 export const CONTEXT_OWNER = 'test-owner';
 export const CONTEXT_REPO = 'test-repo';
 export const CONTEXT_HEAD_SHA = 'head-commit-sha';
+export const MOCK_LATEST_TAG_NAME = 'v2.0.0';
+export const MOCK_BASE_TAG_NAME = 'v1.0.0';
+export const MOCK_LATEST_SHA = 'head-commit-sha';
 export const MOCK_BASE_SHA = 'base-commit-sha';
-export const MOCK_TAG_NAME = 'v1.0.0';
 
-export const mockTagResponse: Tag[] = [{
-  node_id: 'node_id',
-  name: MOCK_TAG_NAME,
-  commit: { sha: MOCK_BASE_SHA, url: 'mock-tag-commit-url' }, // Required fields for Tag type
-  zipball_url: 'mock-zip',
-  tarball_url: 'mock-tar',
-}];
+export const mockTagResponse: Tag[] = [
+  {
+    node_id: 'node_id_latest',
+    name: MOCK_LATEST_TAG_NAME,
+    commit: { sha: MOCK_LATEST_SHA, url: 'mock-tag-commit-url-latest' },
+    zipball_url: 'mock-zip',
+    tarball_url: 'mock-tar',
+  },
+  {
+    node_id: 'node_id_base',
+    name: MOCK_BASE_TAG_NAME,
+    commit: { sha: MOCK_BASE_SHA, url: 'mock-tag-commit-url-base' },
+    zipball_url: 'mock-zip',
+    tarball_url: 'mock-tar',
+  }
+];
 
 export const MOCK_COMMITS: Commit[] = [
   {
