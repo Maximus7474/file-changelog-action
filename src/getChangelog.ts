@@ -52,7 +52,7 @@ export async function getFileChangelog() {
 
   if (latestTag.commit.sha === currentSha && tagsResponse.data[1]) {
     previousTag = tagsResponse.data[1];
-    baseCommitSha = latestTag.commit.sha;
+    baseCommitSha = previousTag.commit.sha;
   } else {
     core.info('No other releases to compare');
     return;
