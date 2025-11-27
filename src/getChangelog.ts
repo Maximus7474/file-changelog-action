@@ -36,7 +36,7 @@ export async function getFileChangelog() {
   const tagsResponse = await octokit.rest.repos.listTags({
     owner,
     repo,
-    per_page: 1,
+    per_page: 2,
   });
 
   core.info(`tagsResponse.data: ${JSON.stringify(tagsResponse.data, null, 4)}`);
